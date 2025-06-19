@@ -1,0 +1,23 @@
+from modules.queue import CircularQueue
+from modules.priority_aging import PriorityManager
+from modules.job_expiry import JobExpiryManager
+from modules.concurrent_submission import SubmissionManager
+from modules.event_simulator import TickSimulator
+from modules.visualization import Visualizer
+
+class PrintQueueManager:
+    def __init__(self):
+        self.queue = CircularQueue()
+        self.priority = PriorityManager(self.queue)
+        self.expiry = JobExpiryManager(self.queue)
+        self.submitter = SubmissionManager(self.queue)
+        self.tick_simulator = TickSimulator(self.queue)
+        self.visualizer = Visualizer(self.queue)
+
+    def enqueue_job(self, user_id, job_id, priority):...
+    def apply_priority_aging(self):...
+    def remove_expired_jobs(self):...
+    def handle_simultaneous_submissions(self, jobs):...
+    def print_job(self):...
+    def tick(self):...
+    def show_status(self):...
