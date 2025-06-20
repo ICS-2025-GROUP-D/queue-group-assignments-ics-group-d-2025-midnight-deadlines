@@ -5,3 +5,7 @@ class Job:
         self.priority = priority
         self.created_at = created_at
         self.wait_time = 0
+
+    def __repr__(self):
+        #string representation of the job object for printing
+        return f" Job(job_id)={self.job_id},user={self.user_id},priority={self.priority},waited={self.wait_time}"
