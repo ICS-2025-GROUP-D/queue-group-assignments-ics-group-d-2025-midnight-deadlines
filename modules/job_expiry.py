@@ -18,5 +18,6 @@ class JobExpiryManager:
             else:
                 non_expired_jobs.append(job)
 
+
         for job in non_expired_jobs:
                 self.queue.enqueue(job)
