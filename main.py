@@ -1,15 +1,9 @@
 from queue_manager import PrintQueueManager
-from config import INITIAL_JOBS, TICKS_TO_SIMULATE
 
-def main():
-    manager = PrintQueueManager()
+pq = PrintQueueManager()
 
-    for job in INITIAL_JOBS:
-        manager.enqueue_job(job.user_id, job.job_id, job.priority)
+pq.queue.append({"job_id": "J1", "priority": 1, "waiting_time": 0})
+pq.queue.append({"job_id": "J2", "priority": 2, "waiting_time": 0})
 
-    for _ in range(TICKS_TO_SIMULATE):
-        manager.tick()
-        manager.show_status()
-
-if __name__ == "__main__":
-    main()
+for _ in range(12):
+    pq.tick()
