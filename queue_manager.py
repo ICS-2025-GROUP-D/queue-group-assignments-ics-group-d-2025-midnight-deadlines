@@ -12,7 +12,7 @@ class PrintQueueManager:
         self.time=0
         self.priority = PriorityManager(self.queue)
         self.expiry = JobExpiryManager(self.queue)
-        self.submitter = SubmissionManager(self.queue)
+        self.submitter = SubmissionManager(self)
         self.tick_simulator = TickSimulator(self.queue)
         self.visualizer = Visualizer(self.queue)
 
