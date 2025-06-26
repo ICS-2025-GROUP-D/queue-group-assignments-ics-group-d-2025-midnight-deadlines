@@ -38,37 +38,5 @@ class PrintQueueManager:
 
     def handle_simultaneous_submissions(self, jobs):...
     def print_job(self):...
-
-    def tick(self):
-        self.time += 1
-        print(f" Tick {self.time}")
-
-        temp_queue = CircularQueue()
-        while not self.queue.is_empty():
-            job = self.queue.dequeue()
-            job.wait_time = self.time - job.created_at
-            temp_queue.enqueue(job)
-
-        while not temp_queue.is_empty():
-            self.queue.enqueue(temp_queue.dequeue())
-
-        self.remove_expired_jobs()
-
-
-
-
-
-    def show_status(self):
-        temp= CircularQueue()
-        if self.queue.is_empty():
-            print("Queue is currently empty")
-
-        else:
-            while not self.queue.is_empty():
-                job = self.queue.dequeue()
-                print(job)
-                temp.enqueue(job)
-
-        # restores the original queue from temp
-        while not temp.is_empty():
-            self.queue.enqueue(temp.dequeue())
+    def tick(self):...
+    def show_status(self):...
