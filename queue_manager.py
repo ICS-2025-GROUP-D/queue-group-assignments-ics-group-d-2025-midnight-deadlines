@@ -17,8 +17,10 @@ class PrintQueueManager:
         self.visualizer = Visualizer(self.queue)
 
     def enqueue_job(self, user_id, job_id, priority):
-        job= Job(user_id,job_id,priority,self.time)
+        current_time=self.tick_simulator.get_time()
+        job= Job(user_id,job_id,priority,created_at=current_time)
         self.queue.enqueue(job)
+        print(f"job{job.job_id} enqueued with priority {job.priority} at tick {current_time}")
 
     def dequeue_job(self):
         if self.queue.is_empty():
