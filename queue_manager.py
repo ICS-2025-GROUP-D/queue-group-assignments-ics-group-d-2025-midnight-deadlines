@@ -9,12 +9,12 @@ from modules.visualization import Visualizer
 class PrintQueueManager:
     def __init__(self):
         self.queue = CircularQueue()
-        self.time=0
+        self.tick_simulator = TickSimulator(self.queue)
         self.priority = PriorityManager(self.queue)
         self.expiry = JobExpiryManager(self.queue)
         self.submitter = SubmissionManager(self)
-        self.tick_simulator = TickSimulator(self.queue)
         self.visualizer = Visualizer(self.queue)
+        self.current_job=None
 
     def enqueue_job(self, user_id, job_id, priority):
         current_time=self.tick_simulator.get_time()
