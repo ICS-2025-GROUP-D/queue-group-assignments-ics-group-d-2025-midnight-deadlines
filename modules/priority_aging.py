@@ -1,18 +1,24 @@
 class PriorityManager:
-    def __init__(self, queue, aging_threshold=5):
+    def _init_(self, queue, aging_threshold=5):
         self.queue = queue
         self.aging_threshold = aging_threshold
 
     def apply_priority_aging(self, current_tick: int):
-        for job in self.queue.items:
-            job["waiting_time"] = current_tick - job["arrival_tick"]
+        jobs = self.queue.get_all_jobs()
 
-            if job["waiting_time"] > self.aging_threshold:
-                job["priority"] += 1
+        for job in jobs:
+            job.wait_time = current_tick - job.created_at
 
-        self.reorder_queue()
+            if job.wait_time > self.aging_threshold:
+                job.priority += 1
 
-    def reorder_queue(self):
-        self.queue.items.sort(
-            key=lambda job: (-job["priority"], -job["waiting_time"])
-        )
+        self.reorder_queue(jobs)
+
+    def reorder_queue(self, jobs):
+        # Sort jobs by priority (descending), then wait_time (descending)
+        jobs.sort(key=lambda job: (-job.priority, -job.wait_time))
+
+        # Clear and rebuild the queue
+        self.queue.clear()
+        for job in jobs:
+            self.queue.enqueue(job)
