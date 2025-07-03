@@ -47,7 +47,7 @@ class CircularQueue:
 
     def get_all_jobs(self):
         jobs=[]
-        for i in range (self.size):
+        for i in range (self._size):
             idx= (self._front + i) % len(self._data)
             if self._data[idx] is not None:
                 jobs.append(self._data[idx])
