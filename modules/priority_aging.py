@@ -1,5 +1,5 @@
 class PriorityManager:
-    def _init_(self, queue, aging_threshold=5):
+    def __init__(self, queue, aging_threshold=5):
         self.queue = queue
         self.aging_threshold = aging_threshold
 

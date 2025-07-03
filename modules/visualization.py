@@ -1,5 +1,5 @@
 class Visualizer:
-    def _init_(self, queue):
+    def __init__(self, queue):
         self.queue = queue
 
     def display_queue(self):
